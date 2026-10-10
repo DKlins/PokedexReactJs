@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testando uso de API</title>
+</head>
+
+<body>
+    <h1>POKE API</h1>
+    <div>
+    <input type="text" id="pokemon">
+    <button onclick="buscarPokemon()">Enviar</button>
+    </div>
+    <img id="imagem" src="" alt="">
+</body>
+
+<script>
+    const nomePokemon = document.getElementById('pokemon')
+    nomePokemon.addEventListener('keydown', function(evento){
+        if (evento.key == 'Enter'){
+            buscarPokemon()
+        }
+    })
+
+    function buscarPokemon(){
+    const nome = document.getElementById('pokemon').value
+    fetch(`https://pokeapi.co/api/v2/pokemon/${nome}`)
+    .then(function(response){
+        return response.json()
+    }).then(function(data){
+        console.log(data)
+        document.getElementById('imagem').src = data.sprites.other['official-artwork'].front_default;
+
+    })
+}
+
+</script>
+</html>
