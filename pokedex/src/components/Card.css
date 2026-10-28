@@ -1,0 +1,15 @@
+.card {
+  background-color: #f3f4f6;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.sprite {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  display: block;
+}
