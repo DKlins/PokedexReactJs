@@ -1,3 +1,5 @@
+//Após cada alteração na barra de pesquisa, 'busca' será atualizado.
+
 export default function BarraBusca({ busca, setBusca }) {
   return (
     <div className="busca-container">

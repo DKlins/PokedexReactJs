@@ -4,6 +4,7 @@ import './Card.css';
 export default function Card({ nome, url }) {
   const [detalhes, setDetalhes] = useState(null);
 
+  //faz a consulta na API, com base na URL de cada pokemon retornada da primeira consulta.
   useEffect(() => {
     fetch(url)
       .then((resposta) => resposta.json())
@@ -17,9 +18,9 @@ export default function Card({ nome, url }) {
 
   return (
     <li className="card">
-      <img 
-        src={detalhes.sprites.other['official-artwork'].front_default} 
-        alt={`${nome} sprite`} 
+      <img
+        src={detalhes.sprites.other['official-artwork'].front_default}
+        alt={`${nome} sprite`}
         className="sprite"
       />
       <p>{nome}</p>
