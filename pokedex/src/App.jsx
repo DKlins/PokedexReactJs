@@ -4,14 +4,15 @@ import FiltroTipo from './components/FiltroTipo';
 import './App.css';
 import Paginacao from './components/Paginacao';
 import ListaPokemons from './components/ListaPokemons';
-
+import DetalhesPokemon from './components/DetalhesPokemon';
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [busca, setBusca] = useState("")
   const [tipo, setTipo] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 24;
+  const [pokemonSelecionado, setPokemonSelecionado] = useState(null);
+  const itensPorPagina = 20;
   const [carregando, setCarregando] = useState(true);
 
   // filtra a lista de pokemon, adicionando apenas aqueles que contem as letras que o usuário digitou na busca
@@ -69,15 +70,26 @@ export default function App() {
     <div>
       <h1>Pokedex</h1>
 
+      {/*se tiver algum pokemon selecionado, mostra os detalhes*/}
+      {pokemonSelecionado ? (
+      <DetalhesPokemon url={pokemonSelecionado.url} 
+      voltar={() => setPokemonSelecionado(null)} />
+      ) : (
+
+      //se não, mostra a tela principal
+      <>
       <p> Mostrando {pokemonFiltrados.length} pokémons </p>
 
       <BarraBusca busca={busca} setBusca={setBusca} />
       <FiltroTipo tipo={tipo} setTipoSelec={setTipo} />
 
-      <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} />
+      <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} setPokemonSelecionado={setPokemonSelecionado} />
 
-      <Paginacao paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual} totalItens={pokemonFiltrados.length} itensPorPagina={itensPorPagina} />
-
+      <Paginacao paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual}
+      //faz a divisão do total de paginas, se o numero for 0, retorna 1. "Math ceil" força que o numero de paginas sejam arredondados para maior
+      TotalPaginas={Math.max(1, Math.ceil(pokemonFiltrados.length / itensPorPagina))} />
+      </>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 export default function BarraBusca({ busca, setBusca }) {
   return (
-    <div className="busca-container">
+    <div>
       <input
         type="text"
         placeholder="Buscar Pokémon..."

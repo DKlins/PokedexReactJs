@@ -13,7 +13,7 @@ export default function FiltroTipo({ tipo, setTipoSelec }) {
     }, []);
 
     return (
-        <div className="filtro-container">
+        <div>
             {/* após cada alteração na seleção, o valor é alterado na variável*/}
             <select value={tipo} onChange={(evento) => setTipoSelec(evento.target.value)}>
                 <option value="">Todos os tipos</option>

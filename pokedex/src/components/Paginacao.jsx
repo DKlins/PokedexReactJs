@@ -1,15 +1,10 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function Paginacao({ paginaAtual, setPaginaAtual, totalItens, itensPorPagina }) {
-    //faz o calculo do total de páginas 
-    const totalPaginas = Math.ceil(totalItens / itensPorPagina);
-
-    //se não tiver nenhum pokemon, o total é 1 para não bugar.
-    const paginasReais = totalPaginas === 0 ? 1 : totalPaginas;
+export default function Paginacao({ paginaAtual, setPaginaAtual, TotalPaginas}) {
 
     return (
-        <div className="paginacao">
-            Página <strong>{paginaAtual}</strong> de <strong>{paginasReais}</strong>
+        <div>
+            Página <strong>{paginaAtual}</strong> de <strong>{TotalPaginas}</strong>
             <button
                 onClick={() => setPaginaAtual(paginaAtual - 1)}
                 disabled={paginaAtual === 1}
@@ -19,7 +14,7 @@ export default function Paginacao({ paginaAtual, setPaginaAtual, totalItens, ite
 
             <button
                 onClick={() => setPaginaAtual(paginaAtual + 1)}
-                disabled={paginaAtual === paginasReais}
+                disabled={paginaAtual === TotalPaginas}
             >
                 <ChevronRight />
             </button>

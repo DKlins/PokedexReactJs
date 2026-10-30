@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Card.css';
 
-export default function Card({ nome, url }) {
+export default function Card({ nome, url, onClick }) {
   const [detalhes, setDetalhes] = useState(null);
 
   //faz a consulta na API, com base na URL de cada pokemon retornada da primeira consulta.
@@ -17,13 +17,13 @@ export default function Card({ nome, url }) {
   }
 
   return (
-    <li className="card">
+    <div className="card" onClick={onClick}>
       <img
         src={detalhes.sprites.other['official-artwork'].front_default}
         alt={`${nome} sprite`}
         className="sprite"
       />
       <p>{nome}</p>
-    </li>
+    </div>
   );
 }
