@@ -1,15 +1,27 @@
-.nome{
+.name{
+    display: flex;
+    margin: 0 auto;
     text-transform: capitalize;
-    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    padding-top: 5px;
 }
 
 .status{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
     text-align: center;
+    padding: 20px;
+    width: 300px;
+    text-transform: capitalize;
 }
 
 .imagem{
-    display: block;
+    display: flex;
     margin: 0 auto;
+    width: 280px;
 }
 
 .fisico{
@@ -19,4 +31,19 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.detalhes{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background-color: #F9FAFB ;
+    border-radius: 10px ;
+    width: 400px
+}
+
+.botao{
+    display: flex;
+    text-align: left;
+    font-size:medium;
 }

@@ -1,17 +1,26 @@
 .id{
   color: gray;
+  text-align: center;
 }
 
 .nome{
+  font-size:large;
   font-weight: bolder;
+  padding-bottom: 10px;
 }
 
 .card {
-  background-color: #f3f4f6;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
   text-transform: capitalize;
+  cursor: pointer;
+  background-color: #F9FAFB;
+  transition: transform 0.2s ease; 
+}
+
+.card:hover {
+  transform: translateY(-5px);
   cursor: pointer;
 }
 
@@ -20,4 +29,5 @@
   height: 280px;
   margin: 0 auto;
   display: block;
+  border-radius: 8px;
 }

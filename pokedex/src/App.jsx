@@ -46,7 +46,6 @@ export default function App() {
       fetch(`https://pokeapi.co/api/v2/type/${tipo}`)
         .then((resposta) => resposta.json())
         .then((dados) => {
-          console.log(dados)
           // já que a consulta por tipo entrega os dados de maneira um pouco diferente, o map abaixo serve para "desempacotar" e deixar no formato que o Card já entende.
           const pokemonsDesempacotados = dados.pokemon.map((item) => item.pokemon);
 
