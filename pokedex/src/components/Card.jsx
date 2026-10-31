@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import BadgeTipo from './BadgeTipo';
 import './Card.css';
+import './BadgeTipo.css';
 
 export default function Card({ nome, url, onClick }) {
   const [detalhes, setDetalhes] = useState(null);
@@ -16,14 +18,24 @@ export default function Card({ nome, url, onClick }) {
     return <li className="card" >Carregando {nome}...</li>;
   }
 
+    const idFormatado = String(detalhes.id).padStart(3, '0');
+
   return (
     <div className="card" onClick={onClick}>
+      <p className='id'>#{idFormatado}</p>
       <img
         src={detalhes.sprites.other['official-artwork'].front_default}
         alt={`${nome} sprite`}
         className="sprite"
       />
-      <p>{nome}</p>
+      <p className='nome'>{nome}</p>
+
+      {/* Estrutura os badges de tipo*/}
+      <div className='tipos'>
+        {detalhes.types.map((pokemon) => (
+         <BadgeTipo key={pokemon.type.name} tipo={pokemon.type.name}/>
+        ))}
+      </div>
     </div>
   );
 }

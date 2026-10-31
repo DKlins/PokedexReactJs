@@ -1,0 +1,17 @@
+.badge-tipo {
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-right: 10px;
+}
+
+.tipos {
+  display: flex;      
+  gap: 1px;
+  flex-wrap: wrap;     
+  align-items: baseline;
+  justify-content: center;
+}
+
