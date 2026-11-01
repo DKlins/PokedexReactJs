@@ -25,11 +25,11 @@ export default function Card({ nome, url, onClick}) {
 
   return (
     <div className='card' onClick={onClick}>
-      <div className="sprite" style={{backgroundColor: coresDosTipos[tipoPrincipal]}}>
+      <div className="fundo" style={{backgroundColor: coresDosTipos[tipoPrincipal]}}>
       <img
         src={detalhes.sprites.other['official-artwork'].front_default}
         alt={`${nome} sprite`}
-        className="sprite"
+        className='sprite'
       />
       </div>
       <p className='id'>#{idFormatado}</p>

@@ -8,7 +8,7 @@ export default function ListaPokemons({ carregando, pokemonsExibidos, setPokemon
   if (carregando) {
     return (
       <div className="tela-carregamento">
-        <Loader className="icone-girando" />
+        <Loader/>
         <p>Buscando Pokémons...</p>
       </div>
     );

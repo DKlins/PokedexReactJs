@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { Select } from "@chakra-ui/react";
 import './FiltroTipo.css'
+
 
 export default function FiltroTipo({ tipo, setTipoSelec }) {
     const [tipos, setTipo] = useState([]);
@@ -13,9 +15,9 @@ export default function FiltroTipo({ tipo, setTipoSelec }) {
     }, []);
 
     return (
-        <div>
+        <div className="selecao">
             {/* após cada alteração na seleção, o valor é alterado na variável*/}
-            <select value={tipo} onChange={(evento) => setTipoSelec(evento.target.value)}>
+            <Select value={tipo} onChange={(evento) => setTipoSelec(evento.target.value)}>
                 <option value="">Todos os tipos</option>
 
                 {/* cria as opções de seleção, de acordo com os tipos retornados da API */}
@@ -24,7 +26,7 @@ export default function FiltroTipo({ tipo, setTipoSelec }) {
                         {type.name}
                     </option>
                 ))}
-            </select>
+            </Select>
         </div>
     );
 }

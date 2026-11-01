@@ -5,12 +5,16 @@
     font-size: larger;
     font-weight: bolder;
     padding-top: 5px;
+    padding-bottom: 5px;
 }
 
+.nome-status{
+    margin-bottom: 2px;
+}
 .status{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2px;
     margin: 0 auto;
     text-align: center;
     padding: 20px;
@@ -18,19 +22,37 @@
     text-transform: capitalize;
 }
 
+.fundo{
+    display: flex;
+    margin: 0 auto;
+    border-radius: 20px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
 .imagem{
     display: flex;
     margin: 0 auto;
-    width: 280px;
+    width: 240px;
+    filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.4));
 }
 
 .fisico{
-    padding-top: 5px ;
+    margin-top: 10px ;
     display: flex;
-    gap: 8px;
+    gap: 60px;
     align-items: center;
     justify-content: center;
+    color: gray;
+    font-weight:bold;
+}
 
+.peso-altura{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    
 }
 
 .detalhes{
@@ -39,11 +61,19 @@
     margin: 0 auto;
     background-color: #F9FAFB ;
     border-radius: 10px ;
-    width: 400px
+    width: 400px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .botao{
     display: flex;
     text-align: left;
     font-size:medium;
+    width: 100px;
+}
+
+.valor{
+    text-align: left;
+    font-size: smaller;
+    color: gray;
 }

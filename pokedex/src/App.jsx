@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import BarraBusca from './components/Busca';
 import FiltroTipo from './components/FiltroTipo';
-import './App.css';
 import Paginacao from './components/Paginacao';
 import ListaPokemons from './components/ListaPokemons';
 import DetalhesPokemon from './components/DetalhesPokemon';
+import IconePokebola from './assets/pokebola-preta.png'
+import './App.css';
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -18,7 +19,7 @@ export default function App() {
   // filtra a lista de pokemon, adicionando apenas aqueles que contem as letras que o usuário digitou na busca
   const pokemonFiltrados = pokemonList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(busca.toLowerCase())
-  );
+  );  
 
   //delimita o index dos primeiros e ultimos itens
   const UltimoItem = paginaAtual * itensPorPagina;
@@ -67,7 +68,10 @@ export default function App() {
 
   return (
     <div>
-      <h1>Pokedex</h1>
+      <div className='cabecalho'>
+      <img className='icon' src={IconePokebola} alt="pokebola" />
+      <strong className='titulo'>Pokédex</strong>
+      </div>
 
       {/*se tiver algum pokemon selecionado, mostra os detalhes*/}
       {pokemonSelecionado ? (
@@ -77,10 +81,12 @@ export default function App() {
 
       //se não, mostra a tela principal
       <>
-      <p> Mostrando {pokemonFiltrados.length} pokémons </p>
-
+      <div className='container-busca'>
       <BarraBusca busca={busca} setBusca={setBusca} />
       <FiltroTipo tipo={tipo} setTipoSelec={setTipo} />
+      </div>
+
+      <p className='info'> Mostrando {pokemonFiltrados.length} pokémons </p>
 
       <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} setPokemonSelecionado={setPokemonSelecionado} />
 

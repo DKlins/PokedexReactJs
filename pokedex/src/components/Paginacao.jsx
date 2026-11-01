@@ -1,23 +1,24 @@
+import { Button } from '@chakra-ui/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import './Paginacao.css'
 
 export default function Paginacao({ paginaAtual, setPaginaAtual, TotalPaginas}) {
 
     return (
-        <div>
-            Página <strong>{paginaAtual}</strong> de <strong>{TotalPaginas}</strong>
-            <button
+        <div className='pagination'>
+            <Button
                 onClick={() => setPaginaAtual(paginaAtual - 1)}
-                disabled={paginaAtual === 1}
-            >
+                disabled={paginaAtual === 1}>
                 <ChevronLeft />
-            </button>
+            </Button>
+            Página <strong>{paginaAtual}</strong> de <strong>{TotalPaginas}</strong>
 
-            <button
+            <Button
                 onClick={() => setPaginaAtual(paginaAtual + 1)}
                 disabled={paginaAtual === TotalPaginas}
             >
                 <ChevronRight />
-            </button>
+            </Button>
         </div>
     );
 }
