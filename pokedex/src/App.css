@@ -39,3 +39,16 @@
     padding-bottom: 5px ;
     padding-left: 20px;
 }
+
+.texto-maiusculo{
+    text-transform: capitalize;
+}
+
+.alerta {
+  color: #856404;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: bold;
+}

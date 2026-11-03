@@ -20,12 +20,16 @@ export default function FiltroTipo({ tipo, setTipoSelec }) {
             <Select value={tipo} onChange={(evento) => setTipoSelec(evento.target.value)}>
                 <option value="">Todos os tipos</option>
 
-                {/* cria as opções de seleção, de acordo com os tipos retornados da API */}
-                {tipos.map((type, index) => (
+                {/* cria as opções de seleção, de acordo com os tipos retornados da API. Apliquei também uma formatação no nome do tipo*/}
+                {tipos.map((type, index) => {
+                    const nomeFormatado = type.name.charAt(0).toUpperCase() + type.name.slice(1);
+
+                    return(
                     <option className="tipos" key={index} value={type.name}>
-                        {type.name}
+                        {nomeFormatado}
                     </option>
-                ))}
+                    );
+                })}
             </Select>
         </div>
     );

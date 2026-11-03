@@ -15,11 +15,12 @@ export default function App() {
   const [pokemonSelecionado, setPokemonSelecionado] = useState(null);
   const itensPorPagina = 20;
   const [carregando, setCarregando] = useState(true);
+  const [erroConexao, setErroConexao] = useState(false);
 
   // filtra a lista de pokemon, adicionando apenas aqueles que contem as letras que o usuário digitou na busca
   const pokemonFiltrados = pokemonList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(busca.toLowerCase())
-  );  
+  );
 
   //delimita o index dos primeiros e ultimos itens
   const UltimoItem = paginaAtual * itensPorPagina;
@@ -31,16 +32,22 @@ export default function App() {
 
   useEffect(() => {
     setCarregando(true);
+    setErroConexao(false);
 
     //analisa se algum tipo foi selecionado, se não foi seguirá por aqui
     if (tipo === "") {
+
       fetch('https://pokeapi.co/api/v2/pokemon?limit=1025')
         .then((resposta) => resposta.json())
         .then((dados) => {
           setPokemonList(dados.results);
-          setCarregando(false);
         })
-        .catch((erro) => console.error("Erro na requisição:", erro));
+        .catch(() => {
+          setErroConexao(true);
+        })
+        .finally(() => {
+          setCarregando(false);
+        });
     }
     //selecionando algum tipo, seguirá por aqui
     else {
@@ -55,9 +62,13 @@ export default function App() {
             (item) => item.url.split('/').at(-2) <= 1025
           );
           setPokemonList(pokemonsOriginais);
-          setCarregando(false);
         })
-        .catch((erro) => console.error("Erro:", erro));
+        .catch(() => {
+          setErroConexao(true);
+        })
+        .finally(() => {
+          setCarregando(false);
+        });
     }
   }, [tipo]);
 
@@ -69,31 +80,49 @@ export default function App() {
   return (
     <div>
       <div className='cabecalho'>
-      <img className='icon' src={IconePokebola} alt="pokebola" />
-      <strong className='titulo'>Pokédex</strong>
+        <img className='icon' src={IconePokebola} alt="pokebola" />
+        <strong className='titulo'>Pokédex</strong>
       </div>
 
       {/*se tiver algum pokemon selecionado, mostra os detalhes*/}
       {pokemonSelecionado ? (
-      <DetalhesPokemon url={pokemonSelecionado.url} 
-      voltar={() => setPokemonSelecionado(null)} />
+        <DetalhesPokemon url={pokemonSelecionado.url}
+          voltar={() => setPokemonSelecionado(null)} />
       ) : (
 
-      //se não, mostra a tela principal
-      <>
-      <div className='container-busca'>
-      <BarraBusca busca={busca} setBusca={setBusca} />
-      <FiltroTipo tipo={tipo} setTipoSelec={setTipo} />
-      </div>
+        //se não, mostra a tela principal
+        <>
+          <div className='container-busca'>
+            <BarraBusca busca={busca} setBusca={setBusca} />
+            <FiltroTipo tipo={tipo} setTipoSelec={setTipo} />
+          </div>
 
-      <p className='info'> Mostrando {pokemonFiltrados.length} pokémons </p>
+          <p className='info'>
+            Mostrando {pokemonFiltrados.length} pokémons
+            {tipo !== "" && (<span> do tipo <span className="texto-maiusculo">{tipo}</span></span>)}
+          </p>
 
-      <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} setPokemonSelecionado={setPokemonSelecionado} />
+          {/*tratamento de erro caso o pokemon digitado na busca, não se encontre na lista*/}
+          {busca.length > 0 && pokemonFiltrados.length === 0 && (
+            <div className="alerta">
+              ⚠️ Ops! Nenhum Pokémon encontrado com o nome "{busca}"
+              {tipo !== "" && (<span> do tipo <strong className="texto-maiusculo">{tipo}</strong></span>)}
+            </div>
+          )}
 
-      <Paginacao paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual}
-      //faz a divisão do total de paginas, se o numero for 0, retorna 1. "Math ceil" força que o numero de paginas sejam arredondados para maior
-      TotalPaginas={Math.max(1, Math.ceil(pokemonFiltrados.length / itensPorPagina))} />
-      </>
+          {/*tratamento de erro caso o usuário fique sem conexão a internet*/}
+          {erroConexao && (
+            <div className="alerta">
+              📡 Ops! Parece que você está sem internet. Verifique sua conexão.
+            </div>
+          )}
+
+          <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} setPokemonSelecionado={setPokemonSelecionado} />
+
+          <Paginacao paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual}
+            //faz a divisão do total de paginas, se o numero for 0, retorna 1. "Math ceil" força que o numero de paginas sejam arredondados para maior
+            TotalPaginas={Math.max(1, Math.ceil(pokemonFiltrados.length / itensPorPagina))} />
+        </>
       )}
     </div>
   );

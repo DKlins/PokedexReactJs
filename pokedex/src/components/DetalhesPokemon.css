@@ -1,4 +1,4 @@
-.name{
+.name {
     display: flex;
     margin: 0 auto;
     text-transform: capitalize;
@@ -8,10 +8,11 @@
     padding-bottom: 5px;
 }
 
-.nome-status{
+.nome-status {
     margin-bottom: 2px;
 }
-.status{
+
+.status {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -22,7 +23,7 @@
     text-transform: capitalize;
 }
 
-.fundo{
+.fundo {
     display: flex;
     margin: 0 auto;
     border-radius: 20px;
@@ -30,50 +31,79 @@
     margin-bottom: 10px;
 }
 
-.imagem{
+.imagem {
     display: flex;
     margin: 0 auto;
     width: 240px;
     filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.4));
 }
 
-.fisico{
-    margin-top: 10px ;
+.fisico {
+    margin-top: 10px;
     display: flex;
     gap: 60px;
     align-items: center;
     justify-content: center;
     color: gray;
-    font-weight:bold;
+    font-weight: 500;
 }
 
-.peso-altura{
+.peso-altura {
     display: flex;
     flex-direction: column;
     gap: 5px;
     align-items: center;
-    
+
 }
 
-.detalhes{
+.detalhes {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background-color: #F9FAFB ;
-    border-radius: 10px ;
+    background-color: #F9FAFB;
+    border-radius: 10px;
     width: 400px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.botao{
+.botao {
     display: flex;
     text-align: left;
-    font-size:medium;
+    font-size: medium;
     width: 100px;
 }
 
-.valor{
+.valor {
     text-align: left;
     font-size: smaller;
     color: gray;
+}
+
+.carregando-detalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.habilidades{
+    display: flex;
+    gap: 3px;
+    border-radius: 8px;
+    margin-left: 50px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+}
+
+.ability{
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 500;
+  gap: 5px;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, WeightIcon, Ruler } from 'lucide-react';
-import { Progress, Button } from '@chakra-ui/react';
+import { ArrowLeft, WeightIcon, Ruler, Loader } from 'lucide-react';
+import { Progress, Button, Image } from '@chakra-ui/react';
 import BadgeTipo from './BadgeTipo';
 import { coresDosTipos } from '../utils/cores';
 import './BadgeTipo.css'
@@ -8,40 +8,49 @@ import './DetalhesPokemon.css'
 
 export default function DetalhesPokemon({ url, voltar }) {
   const [dados, setDados] = useState(null);
+  const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
+    setCarregando(true);
+
     fetch(url)
       .then((resp) => resp.json())
-      .then((data) => setDados(data));
+      .then((data) => setDados(data))
+      .finally(() => {
+        setCarregando(false);
+      })
   }, [url]);
 
-  if (!dados) return <p>Carregando detalhes...</p>;
+  if (carregando) return <p className='carregando-detalhes'> <Loader/> Carregando detalhes...</p>;
 
   //captura o tipo principal do pokemon para exibir a cor posteriormente
   const tipoPrincipal = dados.types[0].type.name;
 
   return (
     <div className='detalhes'>
+
       <Button className='botao' onClick={voltar}> <ArrowLeft /> Voltar </Button>
 
       <h2 className='name'>{dados.name}</h2>
       <div className='fundo' style={{ backgroundColor: coresDosTipos[tipoPrincipal] }}>
-        <img className='imagem' src={dados.sprites.other['official-artwork'].front_default} alt={dados.name} />
+        <Image className='imagem' fallbackSrc='https://via.placeholder.com/150?text=Sem+Imagem' src={dados.sprites.other['official-artwork'].front_default} alt={dados.name} />
       </div>
 
+      {/*utiliza o componente BadgeTipo, para exibir os tipos na página de detalhes*/}
       <div className='tipos' >
         {dados.types.map((pokemon) => (
           <BadgeTipo key={pokemon.type.name} tipo={pokemon.type.name}></BadgeTipo>
         ))}
 
       </div>
+
       {/*dados de peso e altura*/}
       <div className='fisico'>
         <div className='peso-altura'>
-        <Ruler color='gray' />{dados.height / 10}m
+          <Ruler color='gray' />{dados.height / 10}m
         </div>
         <div className='peso-altura'>
-        <WeightIcon color='gray' />{dados.weight / 10}kg
+          <WeightIcon color='gray' />{dados.weight / 10}kg
         </div>
       </div>
 
@@ -66,6 +75,13 @@ export default function DetalhesPokemon({ url, voltar }) {
             </div>
 
           </div>
+        ))}
+      </div>
+
+      <div className='habilidades'>
+        {dados.abilities.map((habilidade) => (
+          <button className='ability' style={{backgroundColor:coresDosTipos[tipoPrincipal]}}>{habilidade.ability.name}
+          </button>
         ))}
       </div>
 

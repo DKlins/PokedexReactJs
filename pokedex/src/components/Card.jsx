@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Image } from '@chakra-ui/react';
 import BadgeTipo from './BadgeTipo';
 import { coresDosTipos } from '../utils/cores';
 import './Card.css';
@@ -26,8 +27,9 @@ export default function Card({ nome, url, onClick}) {
   return (
     <div className='card' onClick={onClick}>
       <div className="fundo" style={{backgroundColor: coresDosTipos[tipoPrincipal]}}>
-      <img
+      <Image
         src={detalhes.sprites.other['official-artwork'].front_default}
+        fallbackSrc='https://via.placeholder.com/150?text=Sem+Imagem'
         alt={`${nome} sprite`}
         className='sprite'
       />
