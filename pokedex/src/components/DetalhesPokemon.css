@@ -12,6 +12,14 @@
     margin-bottom: 2px;
 }
 
+.tipos {
+  display: flex;      
+  gap: 1px;
+  flex-wrap: wrap;     
+  align-items: baseline;
+  justify-content: center;
+}
+
 .status {
     display: flex;
     flex-direction: column;
@@ -107,3 +115,4 @@
   font-weight: 500;
   gap: 5px;
 }
+

@@ -6,12 +6,3 @@
   text-transform: capitalize;
   margin-right: 10px;
 }
-
-.tipos {
-  display: flex;      
-  gap: 1px;
-  flex-wrap: wrap;     
-  align-items: baseline;
-  justify-content: center;
-}
-

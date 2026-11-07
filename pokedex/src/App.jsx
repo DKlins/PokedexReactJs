@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import BarraBusca from './components/Busca';
+import Busca from './components/Busca';
 import FiltroTipo from './components/FiltroTipo';
 import Paginacao from './components/Paginacao';
 import ListaPokemons from './components/ListaPokemons';
@@ -13,13 +13,13 @@ export default function App() {
   const [tipo, setTipo] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [pokemonSelecionado, setPokemonSelecionado] = useState(null);
-  const itensPorPagina = 20;
   const [carregando, setCarregando] = useState(true);
   const [erroConexao, setErroConexao] = useState(false);
+  const itensPorPagina = 20;
 
   // filtra a lista de pokemon, adicionando apenas aqueles que contem as letras que o usuário digitou na busca
   const pokemonFiltrados = pokemonList.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(busca.toLowerCase())
+    pokemon.name.includes(busca.toLowerCase())
   );
 
   //delimita o index dos primeiros e ultimos itens
@@ -72,6 +72,7 @@ export default function App() {
     }
   }, [tipo]);
 
+  //toda vez que tiver uma mudança na barra de busca, ou na seleção do tipo, a página atual será atualizada para 1.
   useEffect(() => {
     setPaginaAtual(1);
   }, [busca, tipo])
@@ -79,6 +80,7 @@ export default function App() {
 
   return (
     <div>
+      {/*cabeçalho da aplicação*/}
       <div className='cabecalho'>
         <img className='icon' src={IconePokebola} alt="pokebola" />
         <strong className='titulo'>Pokédex</strong>
@@ -92,11 +94,13 @@ export default function App() {
 
         //se não, mostra a tela principal
         <>
+          {/*aqui fica o container de buscar e de seleção de tipo*/}
           <div className='container-busca'>
-            <BarraBusca busca={busca} setBusca={setBusca} />
+            <Busca busca={busca} setBusca={setBusca} />
             <FiltroTipo tipo={tipo} setTipoSelec={setTipo} />
           </div>
 
+          {/*mensagem amigavel que mostra a quantidade pokemons na pesquisa*/}
           <p className='info'>
             Mostrando {pokemonFiltrados.length} pokémons
             {tipo !== "" && (<span> do tipo <span className="texto-maiusculo">{tipo}</span></span>)}
@@ -117,8 +121,10 @@ export default function App() {
             </div>
           )}
 
+          {/*aqui existe a lista de pokemons*/}
           <ListaPokemons carregando={carregando} pokemonsExibidos={pokemonsExibidos} setPokemonSelecionado={setPokemonSelecionado} />
 
+          {/*exibe os elementos de paginação, na parte inferior da lista*/}
           <Paginacao paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual}
             //faz a divisão do total de paginas, se o numero for 0, retorna 1. "Math ceil" força que o numero de paginas sejam arredondados para maior
             TotalPaginas={Math.max(1, Math.ceil(pokemonFiltrados.length / itensPorPagina))} />

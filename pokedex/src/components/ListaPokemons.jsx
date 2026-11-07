@@ -14,7 +14,7 @@ export default function ListaPokemons({ carregando, pokemonsExibidos, setPokemon
     );
   }
 
-  // Se não estiver carregando, mostra a lista
+  // Se não estiver carregando, mostra a lista de pokemons exibidos
   return (
     <div className="grid-pokemons">
       {pokemonsExibidos.map((pokemon) => (

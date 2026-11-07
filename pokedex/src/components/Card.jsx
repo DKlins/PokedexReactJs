@@ -8,12 +8,11 @@ import './BadgeTipo.css';
 export default function Card({ nome, url, onClick}) {
   const [detalhes, setDetalhes] = useState(null);
 
-  //faz a consulta na API, com base na URL de cada pokemon retornada da primeira consulta.
+  //faz a consulta na API, com base na URL de cada pokemon retornada da consulta na lista principal.
   useEffect(() => {
     fetch(url)
       .then((resposta) => resposta.json())
       .then((dados) => setDetalhes(dados))
-      .catch((erro) => console.error("Erro ao buscar detalhes:", erro));
   }, [url]);
 
   if (!detalhes) {
@@ -25,15 +24,19 @@ export default function Card({ nome, url, onClick}) {
     const idFormatado = String(detalhes.id).padStart(3, '0');
 
   return (
+    
     <div className='card' onClick={onClick}>
+      
+      {/*imagem do card*/}
       <div className="fundo" style={{backgroundColor: coresDosTipos[tipoPrincipal]}}>
       <Image
         src={detalhes.sprites.other['official-artwork'].front_default}
         fallbackSrc='https://via.placeholder.com/150?text=Sem+Imagem'
         alt={`${nome} sprite`}
-        className='sprite'
-      />
+        className='sprite'/>
       </div>
+      
+      {/*nome e id formatado do pokemon*/}
       <p className='id'>#{idFormatado}</p>
       <p className='nome'>{nome}</p>
 

@@ -10,6 +10,7 @@ export default function DetalhesPokemon({ url, voltar }) {
   const [dados, setDados] = useState(null);
   const [carregando, setCarregando] = useState(true);
 
+  //faz a consulta de detalhes do pokemon, com base na URL do pokemon que foi selecionado
   useEffect(() => {
     setCarregando(true);
 
@@ -21,16 +22,18 @@ export default function DetalhesPokemon({ url, voltar }) {
       })
   }, [url]);
 
-  if (carregando) return <p className='carregando-detalhes'> <Loader/> Carregando detalhes...</p>;
+  //se estiver carregando, mostra uma mensagem amigável 
+  if (carregando) return <p className='carregando-detalhes'> <Loader /> Carregando detalhes...</p>;
 
   //captura o tipo principal do pokemon para exibir a cor posteriormente
   const tipoPrincipal = dados.types[0].type.name;
 
   return (
     <div className='detalhes'>
-
+      {/*botão voltar, para que o usuário possa retornar a lista principal*/}
       <Button className='botao' onClick={voltar}> <ArrowLeft /> Voltar </Button>
 
+      {/*nome e imagem do pokemon*/}
       <h2 className='name'>{dados.name}</h2>
       <div className='fundo' style={{ backgroundColor: coresDosTipos[tipoPrincipal] }}>
         <Image className='imagem' fallbackSrc='https://via.placeholder.com/150?text=Sem+Imagem' src={dados.sprites.other['official-artwork'].front_default} alt={dados.name} />
@@ -78,9 +81,10 @@ export default function DetalhesPokemon({ url, voltar }) {
         ))}
       </div>
 
+      {/*habilidades do pokemon*/}
       <div className='habilidades'>
         {dados.abilities.map((habilidade) => (
-          <button className='ability' style={{backgroundColor:coresDosTipos[tipoPrincipal]}}>{habilidade.ability.name}
+          <button className='ability' style={{ backgroundColor: coresDosTipos[tipoPrincipal] }}>{habilidade.ability.name}
           </button>
         ))}
       </div>
